@@ -8,6 +8,7 @@
     "python.linting.enabled": true,
     "cSpell.words": [
         "configdef",
-        "FENIX"
+        "FENIX",
+        "gglsheet"
     ]
 }

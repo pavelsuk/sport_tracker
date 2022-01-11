@@ -133,6 +133,7 @@ dmypy.json
 **/config/credentials.json
 **/config/token.json
 **/config/configdef.json
-*.private
-**/*.private
+private.*
+**/private.*
+
 

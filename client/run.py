@@ -3,7 +3,7 @@ import logging
 import logging.config
 import pathlib
 
-from typing import List
+from activities import Activities
 
 
 class RunCheck(object):
@@ -32,8 +32,8 @@ class RunCheck(object):
         ap.add_argument(
             "-c",
             "--configfile",
-            help="Path to config file. Default: config/configdef.json",
-            default='config/configdef.json')
+            help="Path to config file. Default: config/private.configdef.json",
+            default='config/private.configdef.json')
         ap.add_argument(
             "-g", "--configgroup", help="Configuration group within config file, Default: None = Active", default=None)
 
@@ -58,8 +58,7 @@ class RunCheck(object):
         if (args.csv):
             self.logger.debug('csv file: {}'.format(self._csv_fname))
         else:
-            self.logger.error('csv file not set, importing data from the web not implemented yet')
-            retVal = False
+            self.logger.debug('csv file not set, default value from the config will be used')
 
         if (not retVal):
             ap.print_help()
@@ -77,10 +76,11 @@ class RunCheck(object):
             # Let's parse the CSV file
             if(self._csv_fname):
                 self.logger.info('Reading from {}'.format(self._csv_fname))
-                # TODO = self.parse_csv()
             else:
-                self.logger.error('NO CSV')
-            self.logger.info('Job finished'.format(self._csv_fname))
+                self.logger.debug('NO CSV on command line, using config ')
+            activities = Activities(self._configgroup, self._configfile, self.logger, self._csv_fname)
+            
+            self.logger.info('Job finished')
                 
            
 if __name__ == "__main__":
