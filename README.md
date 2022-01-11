@@ -2,11 +2,11 @@
 
 ## What I want to achieve
 
-- One place where I can see all my sport activites
+- One place where I can see all my sport activities
 - These activities are tracked by my Garmin watch (FENIX 6S)
-- Data are also in Garmin Connect app 
+- Data are also in Garmin Connect app
 - I want to be able to see:
-  - How much time do I spent doing Hiking/Walking/Cycling/Yoga/Strenghts 
+  - How much time do I spent doing Hiking/Walking/Cycling/Yoga/Strengths
   - The distance (for outdoor activities)
   - on daily/weekly/monthly basis
   - in the context of weekly/monthly/annual goal
@@ -39,7 +39,7 @@ Goal: automate manual step (merging) from above. Export will be still manual. Vi
 ### General requirements for all components
 
 - Use  _logging_ as much as you can (instead of just print) with one global logger configured in .\config\logging.conf. This file can be stored in git
-- Settings should be stored in .\config\configdef.json both for test and prod environment. These settings should never be commited to git - only examples.
+- Settings should be stored in .\config\configdef.json both for test and prod environment. These settings should never be committed to git - only examples.
 - Use pytest for testing, flake8 for linting
 - Tests should be stored in the same folder, with prefix _test__
 
@@ -71,6 +71,5 @@ Goal: automate manual step (merging) from above. Export will be still manual. Vi
     - month
     - day
 - The client should accept parameters to override default configuration, if needed
-- 
 
 ### Server (TBD)
