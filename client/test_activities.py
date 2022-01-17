@@ -4,6 +4,7 @@
 import pytest
 import unittest
 
+from app import Application
 from activities import Activities
 
 
@@ -11,15 +12,17 @@ class Test_Activities(unittest.TestCase):
 
     def setUp(self) -> None:
         super().setUp()
+        self.app = Application()
+        self.app.init_logging()
+        self.app.read_config(config_group='test')
+        activities = Activities(self.app)
+        self.assertIsNotNone(activities)
+        self.assertIsInstance(activities, Activities)
+        self.activities = activities
 
     def tearDown(self) -> None:
         super().tearDown()
 
-    @pytest.mark.long
-    def test__init__(self) -> None:
-        activities = Activities()
-        self.assertIsNotNone(activities)
-        self.assertIsInstance(activities, Activities)
 
 
 if __name__ == "__main__":
