@@ -23,7 +23,15 @@ class Test_Activities(unittest.TestCase):
     def tearDown(self) -> None:
         super().tearDown()
 
+    def test_activites_class(self):
+        self.assertIsNotNone(self.activities)
+        self.assertIsInstance(self.activities, Activities)
 
+    def test_read_from_CSV(self):
+        self.activities.read_from_CSV()
+
+    def test_update(self):
+        self.activities.update()
 
 if __name__ == "__main__":
     unittest.main()
