@@ -41,7 +41,7 @@ Goal: automate manual step (merging) from above. Export will be still manual. Vi
 - Use  _logging_ as much as you can (instead of just print) with one global logger configured in .\config\logging.conf. This file can be stored in git
 - Settings should be stored in .\config\private.configdef.json both for test and prod environment. These settings should never be committed to git - only examples.
 - Use pytest for testing, flake8 for linting
-- Tests should be stored in the same folder, with prefix _test__. You can run them by `python -m pytest` from current directory
+- Tests should be stored in the same folder, with prefix _test__. You can run them by `python -m pytest --capture=no` from current directory
 
 ### Client (MVP)
 

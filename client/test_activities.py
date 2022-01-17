@@ -16,10 +16,10 @@ class Test_Activities(unittest.TestCase):
         super().tearDown()
 
     @pytest.mark.long
-    def test_Init(self) -> None:
-        self.activities = Activities()
-        self.assertIsNotNone(self.activities)
-        self.assertIsInstance(self.activities, Activities)
+    def test__init__(self) -> None:
+        activities = Activities()
+        self.assertIsNotNone(activities)
+        self.assertIsInstance(activities, Activities)
 
 
 if __name__ == "__main__":

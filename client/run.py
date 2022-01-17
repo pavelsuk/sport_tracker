@@ -4,6 +4,7 @@ import logging.config
 import pathlib
 
 from activities import Activities
+from app import Application
 
 
 class RunCheck(object):
@@ -11,10 +12,11 @@ class RunCheck(object):
     PGM_VERSION = '0.1'
 
     def __init__(self):
-        current_dir = pathlib.Path(__file__).parent
-        logfile = current_dir.joinpath('config/logging.conf')
-        logging.config.fileConfig(logfile)
-        self.logger = logging.getLogger('dbg')
+        app = Application()
+        app.init_logging()
+        
+        self.app=app
+        # self.logger = app.logger
         self._slParser = None
         self._csv_fname = None
 
@@ -43,22 +45,22 @@ class RunCheck(object):
 
         verb_choices = ['DEBUG', 'INFO', 'WARNING', 'ERROR', 'CRITICAL']
         verbose_lvl = 'ERROR'
-        self.logger.setLevel(verbose_lvl)
+        self.app.logger.setLevel(verbose_lvl)
 
         if (args.verbosity):
             verbose_lvl = args.verbosity.upper()
             if (verbose_lvl in verb_choices):
-                self.logger.setLevel(verbose_lvl)
-                self.logger.debug('Verbosity level :{}'.format(verbose_lvl))
+                self.app.logger.setLevel(verbose_lvl)
+                self.app.logger.debug('Verbosity level :{}'.format(verbose_lvl))
             else:
                 print('Verbosity must be one of the following values: DEBUG, INFO, WARNING, ERROR, CRITICAL')
                 retVal = False
 
         self._csv_fname = args.csv
         if (args.csv):
-            self.logger.debug('csv file: {}'.format(self._csv_fname))
+            self.app.logger.debug('csv file: {}'.format(self._csv_fname))
         else:
-            self.logger.debug('csv file not set, default value from the config will be used')
+            self.app.logger.debug('csv file not set, default value from the config will be used')
 
         if (not retVal):
             ap.print_help()
@@ -75,12 +77,12 @@ class RunCheck(object):
         if (self.parse_args()):
             # Let's parse the CSV file
             if(self._csv_fname):
-                self.logger.info('Reading from {}'.format(self._csv_fname))
+                self.app.logger.info('Reading from {}'.format(self._csv_fname))
             else:
-                self.logger.debug('NO CSV on command line, using config ')
-            activities = Activities(self._configgroup, self._configfile, self.logger, self._csv_fname)
+                self.app.logger.debug('NO CSV on command line, using config ')
+            activities = Activities(self._configgroup, self._configfile, self.app.logger, self._csv_fname)
             
-            self.logger.info('Job finished')
+            self.app.logger.info('Job finished')
                 
            
 if __name__ == "__main__":

@@ -135,5 +135,4 @@ dmypy.json
 **/config/configdef.json
 private.*
 **/private.*
-
-
+**/pytest-logs.txt
