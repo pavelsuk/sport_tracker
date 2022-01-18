@@ -1,7 +1,4 @@
-import logging
-import logging.config
 import pathlib
-import json
 import csv
 import os
 
@@ -33,7 +30,7 @@ class Activities(object):
         csv_fName_update = config_group["csv_fname_update"]
         if(csv_fName_update):
             current_dir = pathlib.Path(__file__).parent
-            self._csv_fName_update = os.path.join(current_dir, csv_fName_update)   
+            self._csv_fName_update = os.path.join(current_dir, csv_fName_update)
         self.app.logger.debug('self._csv_fName_update= {}'.format(self._csv_fName_update))
         
         self._required_fields = config_group["required_fields"]
@@ -47,7 +44,7 @@ class Activities(object):
             if(required_fields is None):
                 required_fields = self._required_fields
             for required_field in required_fields:
-                outRow[required_field] = rowIn.get(required_field)  
+                outRow[required_field] = rowIn.get(required_field)
             outRows.append(outRow)
             self.app.logger.debug(f'filter_fields: rowOut {outRow}')
             
