@@ -3,7 +3,7 @@ import csv
 import os
 
 from app import Application
-
+from gglsheet import GGlSheet
 
 class Activities(object):
     '''Data holder for activities.
@@ -36,15 +36,21 @@ class Activities(object):
         self._required_fields = config_group["required_fields"]
         self.app.logger.debug('self._required_fields= {}'.format(self._required_fields))
         
-    def filter_fields(self, listDictIn, required_fields=None):
+    def filter_fields(self, listDictIn, asList: bool = False, required_fields=None):
         outRows = []
         for rowIn in listDictIn:
             self.app.logger.debug(f'filter_fields: rowIn {rowIn}')
-            outRow = {}
+            if (asList):
+                outRow = []
+            else:
+                outRow = {}
             if(required_fields is None):
                 required_fields = self._required_fields
             for required_field in required_fields:
-                outRow[required_field] = rowIn.get(required_field)
+                if(asList):
+                    outRow.append(rowIn.get(required_field))
+                else:
+                    outRow[required_field] = rowIn.get(required_field)
             outRows.append(outRow)
             self.app.logger.debug(f'filter_fields: rowOut {outRow}')
             
@@ -85,14 +91,14 @@ class Activities(object):
         self.app.logger.debug(f'merged list: {rows_base}')
         return rows_base
 
-    def read_from_CSV(self, csv_fname=None) -> list:
+    def read_from_CSV(self, csv_fname=None, asList: bool = False) -> list:
         if csv_fname is None:
             csv_fname = self._csv_fname
             
         outRows = []
         with open(csv_fname, newline='', encoding='utf-8') as f:
             reader = csv.DictReader(f)
-            outRows = self.filter_fields(reader)
+            outRows = self.filter_fields(reader, asList)
 
         self.app.logger.debug(f'read_from_CSV: {outRows}')
         return outRows
@@ -104,6 +110,13 @@ class Activities(object):
         update_list = self.read_from_CSV(self._csv_fName_update)
         new_list = self.merge_2_lists(base_list, update_list)
         self.app.logger.debug(f'new_list: {new_list}')
+
+    def updateGglSheet(self):
+        self.app.logger.debug('updateGglSheet(self) self._csv_fName_update= {}'.format(self._csv_fName_update))
+        act_list = self.read_from_CSV(self._csv_fName_update, True)
+        gglSheet = GGlSheet(self.app)
+        updatedRowNumber = gglSheet.process_new_activities(act_list)
+        self.app.logger.debug(f'updateGglSheet(self) updatedRowNumber: {updatedRowNumber}')
 
 
 if __name__ == "__main__":

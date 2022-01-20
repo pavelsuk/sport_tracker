@@ -73,3 +73,18 @@ Goal: automate manual step (merging) from above. Export will be still manual. Vi
 - The client should accept parameters to override default configuration, if needed
 
 ### Server (TBD)
+
+## Installation
+
+### Client
+
+- python (using v 3.9)
+- [Google libs](https://developers.google.com/sheets/api/quickstart/python) 
+  - ```pip install --upgrade google-api-python-client google-auth-httplib2 google-auth-oauthlib```
+  
+  ``` bash
+  conda install -c conda-forge google-api-python-client
+  conda install -c conda-forge google-auth-httplib2
+  conda install -c conda-forge google-auth-oauthlib
+  conda install -c conda-forge oauth2client
+  ```y

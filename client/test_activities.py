@@ -33,5 +33,7 @@ class Test_Activities(unittest.TestCase):
     def test_update(self):
         self.activities.update()
 
+    def test_updateGglSheet(self):
+        self.activities.updateGglSheet()
 if __name__ == "__main__":
     unittest.main()
