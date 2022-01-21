@@ -137,3 +137,4 @@ private.*
 **/private.*
 **/pytest-logs.txt
 client/files/All_Activities_20220120.csv
+client/files/Activities.csv
