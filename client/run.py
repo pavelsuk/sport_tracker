@@ -1,7 +1,4 @@
 import argparse
-import logging
-import logging.config
-import pathlib
 
 from activities import Activities
 from app import Application
@@ -15,7 +12,7 @@ class RunCheck(object):
         app = Application()
         app.init_logging()
         
-        self.app=app
+        self.app = app
         # self.logger = app.logger
         self._slParser = None
         self._csv_fname = None
@@ -75,13 +72,16 @@ class RunCheck(object):
 
     def run(self):
         if (self.parse_args()):
+            self.app.read_config(self._configgroup, self._configfile)
+
             # Let's parse the CSV file
             if(self._csv_fname):
                 self.app.logger.info('Reading from {}'.format(self._csv_fname))
             else:
                 self.app.logger.debug('NO CSV on command line, using config ')
-            activities = Activities(self._configgroup, self._configfile, self.app.logger, self._csv_fname)
             
+            activities = Activities(self.app)
+            activities.updateGglSheet()
             self.app.logger.info('Job finished')
                 
            

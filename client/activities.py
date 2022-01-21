@@ -5,6 +5,7 @@ import os
 from app import Application
 from gglsheet import GGlSheet
 
+
 class Activities(object):
     '''Data holder for activities.
     The data can be read from CSV, stored directly to google sheet or to database through API

@@ -1,7 +1,7 @@
 # import logging
 # import logging.config
 # import pathlib
-import pytest
+# import pytest
 import unittest
 
 from app import Application
@@ -35,5 +35,7 @@ class Test_Activities(unittest.TestCase):
 
     def test_updateGglSheet(self):
         self.activities.updateGglSheet()
+
+
 if __name__ == "__main__":
     unittest.main()
