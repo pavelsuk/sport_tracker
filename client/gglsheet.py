@@ -159,6 +159,7 @@ class GGlSheet(object):
             newer_than = self.get_latest_activity_time()
 
         rows_base = []
+        act_list.reverse()
         for row in act_list:
             if(datetime.datetime.strptime(row[1], '%Y-%m-%d %H:%M:%S') > newer_than):
                 rows_base.append(row)

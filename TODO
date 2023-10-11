@@ -1,3 +1,6 @@
 ✔ Initiate the project in github @started(22-01-11 12:44) @done(22-01-11 14:30) @lasted(1h46m57s)
 ✔ Create a boilerplate client application that can be started and tested, using the logging and config file @started(22-01-11 14:33) @done(22-01-17 10:13) @lasted(5d19h40m53s)
 ☐ Refactoring: Add a global object "app: and move settings and logger there @started(22-01-17 10:14)
+☐ Refactoring: Use pandas/dataframe
+✔ Sort the list of new events by date asc, not dsc @done(23-10-11 14:33) @lasted(1m4s)
+
